@@ -12,7 +12,7 @@ from guardrails.validator_base import (
 )
 
 
-@register_validator(name="guardrails/two-words", data_type="string")
+@register_validator(name="guardrails/two_words", data_type="string")
 class TwoWords(Validator):
     """Validates that a value is two words.
 
