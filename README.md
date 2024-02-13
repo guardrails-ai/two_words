@@ -1,4 +1,4 @@
-# Overview
+## Overview
 
 | Developed by | Guardrails AI |
 | --- | --- |
@@ -8,19 +8,19 @@
 | License | Apache 2 |
 | Input/Output | Output |
 
-# Description
+## Description
 
 The validator ensures that a generated LLM output is two words only.
 
-# Installation
+## Installation
 
 ```bash
-$ guardrails hub install hub://guardrails/two-words
+$ guardrails hub install hub://guardrails/two_words
 ```
 
-# Usage Examples
+## Usage Examples
 
-## Validating string output via Python
+### Validating string output via Python
 
 ```python
 # Import Guard and Validator
@@ -39,7 +39,7 @@ guard.parse("two dogs")  # Validator passes
 guard.parse("horse")  # Validator fails
 ```
 
-## Validating JSON output via Python
+### Validating JSON output via Python
 
 ```python
 # Import Guard and Validator
@@ -51,8 +51,8 @@ val = ValidChoices(on_fail="fix")
 
 # Create Pydantic BaseModel
 class PetInfo(BaseModel):
-		pet_name: str = Field("Name of pet", validators=[val, ...])
-		pet_type: str = Field(description="Type of pet")
+    pet_name: str = Field("Name of pet", validators=[val, ...])
+    pet_type: str = Field(description="Type of pet")
 
 # Create a Guard to check for valid Pydantic output
 guard = Guard.from_pydantic(output_class=PetInfo)
@@ -60,22 +60,13 @@ guard = Guard.from_pydantic(output_class=PetInfo)
 # Run LLM output generating JSON through guard
 guard.parse("""
 {
-		"pet_name": "Caesar Rajpal",
-		"pet_type": "dog"
+    "pet_name": "Caesar Rajpal",
+    "pet_type": "dog"
 }
 """)
 ```
 
-## Validating string output via RAIL
-
-tbd
-
-## Validating JSON output via RAIL
-
-tbd
-
-# API Reference
+## API Reference
 
 `__init__`
-
 - `on_fail`: The policy to enact when a validator fails.
