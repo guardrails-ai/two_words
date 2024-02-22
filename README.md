@@ -4,18 +4,18 @@
 | --- | --- |
 | Date of development | Feb 15, 2024 |
 | Validator type | Format |
-| Blog |  |
+| Blog | - |
 | License | Apache 2 |
 | Input/Output | Output |
 
 ## Description
 
-The validator ensures that a generated LLM output is two words only.
+The validator ensures that a generated LLM output contains exactly two words.
 
 ## Installation
 
 ```bash
-$ guardrails hub install hub://guardrails/two_words
+guardrails hub install hub://guardrails/two_words
 ```
 
 ## Usage Examples
@@ -24,46 +24,22 @@ $ guardrails hub install hub://guardrails/two_words
 
 ```python
 # Import Guard and Validator
-from guardrails.hub import TwoWords
 from guardrails import Guard
-
-# Initialize Validator
-val = ValidChoices(on_fail="fix")
+from guardrails.hub import TwoWords
 
 # Setup Guard
-guard = Guard.from_string(
-    validators=[val, ...],
-)
+guard = Guard().use(TwoWords, on_fail="exception")
 
-guard.parse("two dogs")  # Validator passes
-guard.parse("horse")  # Validator fails
+response = guard.validate("May December")  # Validator passes
+
+try:
+    response = guard.validate("El Camino: A Breaking Bad Movie")  # Validator fails
+except Exception as e:
+    print(e)
 ```
-
-### Validating JSON output via Python
-
-```python
-# Import Guard and Validator
-from pydantic import BaseModel
-from guardrails.hub import TwoWords
-from guardrails import Guard
-
-val = ValidChoices(on_fail="fix")
-
-# Create Pydantic BaseModel
-class PetInfo(BaseModel):
-    pet_name: str = Field("Name of pet", validators=[val, ...])
-    pet_type: str = Field(description="Type of pet")
-
-# Create a Guard to check for valid Pydantic output
-guard = Guard.from_pydantic(output_class=PetInfo)
-
-# Run LLM output generating JSON through guard
-guard.parse("""
-{
-    "pet_name": "Caesar Rajpal",
-    "pet_type": "dog"
-}
-""")
+Output:
+```console
+Validation failed for field with errors: Value must be exactly two words
 ```
 
 ## API Reference
@@ -81,7 +57,7 @@ Initializes a new instance of the Validator class.
 
 <br>
 
-**`__call__(self, value, metadata={}) → ValidationOutcome`**
+**`__call__(self, value, metadata={}) → ValidationResult`**
 
 <ul>
 
