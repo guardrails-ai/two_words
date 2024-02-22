@@ -1,5 +1,4 @@
-from typing import Any, Dict
-
+from typing import Dict
 from pydash.strings import words as _words
 
 from guardrails.logger import logger
@@ -20,7 +19,7 @@ class TwoWords(Validator):
 
     | Property                      | Description                       |
     | ----------------------------- | --------------------------------- |
-    | Name for `format` attribute   | `two-words`                       |
+    | Name for `format` attribute   | `guardrails/two_words`            |
     | Supported data types          | `string`                          |
     | Programmatic fix              | Pick the first two words.         |
     """
@@ -36,13 +35,14 @@ class TwoWords(Validator):
 
         return " ".join(words[:2])
 
-    def validate(self, value: Any, metadata: Dict) -> ValidationResult:
+    def validate(self, value: str, metadata: Dict) -> ValidationResult:
+        """Validation method of this validator."""
         logger.debug(f"Validating {value} is two words...")
 
         if len(value.split()) != 2:
             return FailResult(
-                error_message="must be exactly two words",
-                fix_value=self._get_fix_value(str(value)),
+                error_message="Value must be exactly two words",
+                fix_value=self._get_fix_value(value),
             )
 
         return PassResult()
