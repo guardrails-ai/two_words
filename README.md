@@ -1,16 +1,21 @@
 ## Overview
 
 | Developed by | Guardrails AI |
-| --- | --- |
 | Date of development | Feb 15, 2024 |
 | Validator type | Format |
-| Blog | - |
+| Blog |  |
 | License | Apache 2 |
 | Input/Output | Output |
 
 ## Description
 
+### Intended Use
 The validator ensures that a generated LLM output contains exactly two words.
+
+### Requirements 
+
+* Dependencies:
+	- guardrails-ai>=0.4.0
 
 ## Installation
 
@@ -42,7 +47,7 @@ Output:
 Validation failed for field with errors: Value must be exactly two words
 ```
 
-## API Reference
+# API Reference
 
 **`__init__(self, on_fail="noop")`**
 <ul>
