@@ -12,7 +12,7 @@
 ### Intended Use
 The validator ensures that a generated LLM output contains exactly two words.
 
-### Requirements 
+### Requirements
 
 * Dependencies:
     - guardrails-ai>=0.4.0
@@ -20,7 +20,7 @@ The validator ensures that a generated LLM output contains exactly two words.
 ## Installation
 
 ```bash
-guardrails hub install hub://guardrails/two_words
+$ guardrails hub install hub://guardrails/two_words
 ```
 
 ## Usage Examples
@@ -62,7 +62,7 @@ Initializes a new instance of the Validator class.
 
 <br>
 
-**`__call__(self, value, metadata={}) → ValidationResult`**
+**`__call__(self, value, metadata={}) -> ValidationResult`**
 
 <ul>
 
