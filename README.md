@@ -15,7 +15,7 @@ The validator ensures that a generated LLM output contains exactly two words.
 ### Requirements 
 
 * Dependencies:
-	- guardrails-ai>=0.4.0
+    - guardrails-ai>=0.4.0
 
 ## Installation
 
